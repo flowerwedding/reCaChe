@@ -1,6 +1,6 @@
 /**
  * @Title  cache
- * @description  #
+ * @description  加锁，并发安全
  * @Author  沈来
  * @Update  2020/8/17 14:32
  **/
