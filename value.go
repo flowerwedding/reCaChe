@@ -6,6 +6,7 @@
  **/
 package reCaChe
 
+//其他类型的长度，要求自己实现该方法
 type Value interface {
 	Len() int
 }

@@ -27,7 +27,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myUtil/bigcache高性能缓存.go" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -38,43 +38,12 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\GoProjects\src\reCaChe" />
-      <recent name="D:\GoProjects\src\reCaChe\fast" />
       <recent name="D:\GoProjects\src\reCaChe\lru" />
+      <recent name="D:\GoProjects\src\reCaChe\fast" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.BenchmarkFastCacheSetParallel in reCaChe/fast">
-    <configuration name="BenchmarkFastCacheSetParallel in reCaChe" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="reCaChe" />
-      <working_directory value="$PROJECT_DIR$" />
-      <framework value="gobench" />
-      <kind value="PACKAGE" />
-      <package value="reCaChe" />
-      <directory value="$PROJECT_DIR$/" />
-      <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^BenchmarkFastCacheSetParallel$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="BenchmarkFastCacheSetParallel in reCaChe/fast" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="reCaChe" />
-      <working_directory value="$PROJECT_DIR$/fast" />
-      <framework value="gobench" />
-      <kind value="PACKAGE" />
-      <package value="reCaChe/fast" />
-      <directory value="$PROJECT_DIR$/" />
-      <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^BenchmarkFastCacheSetParallel$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestTourCacheGet in reCaChe" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="reCaChe" />
-      <working_directory value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="reCaChe" />
-      <pattern value="^TestTourCacheGet$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestTourCacheGet in reCaChe/lru (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Test.TestHashing in reCaChe/consistent">
+    <configuration name="TestGetter in reCaChe/lru" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="reCaChe" />
       <working_directory value="$PROJECT_DIR$/lru" />
       <framework value="gotest" />
@@ -82,7 +51,40 @@
       <package value="reCaChe/lru" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestTourCacheGet$" />
+      <pattern value="^TestGetter$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestHashing in reCaChe/consistent" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="reCaChe" />
+      <working_directory value="$PROJECT_DIR$/consistent" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="reCaChe/consistent" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestHashing$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestNewHTTPPool in reCaChe" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="reCaChe" />
+      <working_directory value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="reCaChe" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestNewHTTPPool$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestNewHTTPPool in reCaChe/lru" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="reCaChe" />
+      <working_directory value="$PROJECT_DIR$/lru" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="reCaChe/lru" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestNewHTTPPool$" />
       <method v="2" />
     </configuration>
     <configuration name="TestTourCacheGet in reCaChe/lru" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -91,16 +93,18 @@
       <framework value="gotest" />
       <kind value="PACKAGE" />
       <package value="reCaChe/lru" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
       <pattern value="^TestTourCacheGet$" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.BenchmarkFastCacheSetParallel in reCaChe/fast" />
-        <item itemvalue="Go Test.BenchmarkFastCacheSetParallel in reCaChe" />
-        <item itemvalue="Go Test.TestTourCacheGet in reCaChe/lru (1)" />
+        <item itemvalue="Go Test.TestHashing in reCaChe/consistent" />
+        <item itemvalue="Go Test.TestNewHTTPPool in reCaChe/lru" />
+        <item itemvalue="Go Test.TestNewHTTPPool in reCaChe" />
         <item itemvalue="Go Test.TestTourCacheGet in reCaChe/lru" />
-        <item itemvalue="Go Test.TestTourCacheGet in reCaChe" />
+        <item itemvalue="Go Test.TestGetter in reCaChe/lru" />
       </list>
     </recent_temporary>
   </component>
@@ -108,29 +112,29 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="504" y="216" key="FileChooserDialogImpl" timestamp="1597817066462">
+    <state x="504" y="216" key="FileChooserDialogImpl" timestamp="1597828629799">
       <screen x="0" y="0" width="1440" height="920" />
     </state>
-    <state x="504" y="216" key="FileChooserDialogImpl/0.0.1440.920@0.0.1440.920" timestamp="1597817066462" />
-    <state width="1350" height="291" key="GridCell.Tab.0.bottom" timestamp="1597742750092">
+    <state x="504" y="216" key="FileChooserDialogImpl/0.0.1440.920@0.0.1440.920" timestamp="1597828629799" />
+    <state width="619" height="302" key="GridCell.Tab.0.bottom" timestamp="1597835588363">
       <screen x="0" y="0" width="1440" height="920" />
     </state>
-    <state width="1350" height="291" key="GridCell.Tab.0.bottom/0.0.1440.920@0.0.1440.920" timestamp="1597742750092" />
-    <state width="1350" height="291" key="GridCell.Tab.0.center" timestamp="1597742750092">
+    <state width="619" height="302" key="GridCell.Tab.0.bottom/0.0.1440.920@0.0.1440.920" timestamp="1597835588363" />
+    <state width="619" height="302" key="GridCell.Tab.0.center" timestamp="1597835588363">
       <screen x="0" y="0" width="1440" height="920" />
     </state>
-    <state width="1350" height="291" key="GridCell.Tab.0.center/0.0.1440.920@0.0.1440.920" timestamp="1597742750092" />
-    <state width="1350" height="291" key="GridCell.Tab.0.left" timestamp="1597742750091">
+    <state width="619" height="302" key="GridCell.Tab.0.center/0.0.1440.920@0.0.1440.920" timestamp="1597835588363" />
+    <state width="619" height="302" key="GridCell.Tab.0.left" timestamp="1597835588362">
       <screen x="0" y="0" width="1440" height="920" />
     </state>
-    <state width="1350" height="291" key="GridCell.Tab.0.left/0.0.1440.920@0.0.1440.920" timestamp="1597742750091" />
-    <state width="1350" height="291" key="GridCell.Tab.0.right" timestamp="1597742750092">
+    <state width="619" height="302" key="GridCell.Tab.0.left/0.0.1440.920@0.0.1440.920" timestamp="1597835588362" />
+    <state width="619" height="302" key="GridCell.Tab.0.right" timestamp="1597835588363">
       <screen x="0" y="0" width="1440" height="920" />
     </state>
-    <state width="1350" height="291" key="GridCell.Tab.0.right/0.0.1440.920@0.0.1440.920" timestamp="1597742750092" />
-    <state x="383" y="195" width="672" height="678" key="search.everywhere.popup" timestamp="1597658330718">
+    <state width="619" height="302" key="GridCell.Tab.0.right/0.0.1440.920@0.0.1440.920" timestamp="1597835588363" />
+    <state x="383" y="195" width="672" height="678" key="search.everywhere.popup" timestamp="1597825570108">
       <screen x="0" y="0" width="1440" height="920" />
     </state>
-    <state x="383" y="195" width="672" height="678" key="search.everywhere.popup/0.0.1440.920@0.0.1440.920" timestamp="1597658330718" />
+    <state x="383" y="195" width="672" height="678" key="search.everywhere.popup/0.0.1440.920@0.0.1440.920" timestamp="1597825570108" />
   </component>
 </project>

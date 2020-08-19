@@ -12,6 +12,7 @@ func newDefaultHasher() fnv64a {
 
 type fnv64a struct{}
 
+//fnv哈希算法64位时固定的参数
 const (
 	offset64 = 14695981039346656037
 	prime64 = 1099511628211

@@ -42,7 +42,7 @@ func (sc *safeCaChe) set(key string, value interface{}){
 func (sc *safeCaChe) get(key string) interface{}{
 	sc.m.RLock()
 	defer sc.m.RUnlock()
-	sc.nget++
+	sc.nget++//缓存获取总次数
 	if sc.cache == nil {
 		return nil
 	}
@@ -50,7 +50,7 @@ func (sc *safeCaChe) get(key string) interface{}{
 	v := sc.cache.Get(key)
 	if v != nil {
 		log.Println("[TourCache] hit")
-		sc.nhit++
+		sc.nhit++//获取到缓存的次数
 	}
 
 	return v

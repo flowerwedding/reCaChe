@@ -10,6 +10,7 @@ import (
 	"github.com/matryer/is"
 	"log"
 	"reCaChe/lru"
+	"reflect"
 	"sync"
 	"testing"
 )
@@ -30,7 +31,7 @@ func TestTourCacheGet(t *testing.T) {
 		}
 		return nil
 	})
-	tourCache := NewTourCache(getter, lru.New(0,nil))
+	tourCache := NewTourCache("1",getter, lru.New(0,nil))
 
 	its := is.New(t)
 
@@ -41,7 +42,7 @@ func TestTourCacheGet(t *testing.T) {
 		go func(k, v string){
 			defer wg.Done()
 			its.Equal(tourCache.Get(k), v)
-
+			//第二次读缓存里面的
 			its.Equal(tourCache.Get(k), v)
 		}(k, v)
 	}
@@ -52,4 +53,17 @@ func TestTourCacheGet(t *testing.T) {
 
 	its.Equal(tourCache.Stat().NGet, 10)
 	its.Equal(tourCache.Stat().NHit, 4)
+}
+
+func TestGetter(t *testing.T) {
+	//匿名回调函数转换成接口f.Get
+	var f Getter = GetFunc(func(key string) interface{}{
+		return []byte(key)
+	})
+
+	expect := []byte("key")
+	//f.Get调用该接口的方法，即调用匿名回调函数
+	if v := f.Get("key"); !reflect.DeepEqual(v, expect) {
+		t.Errorf("callback failed")
+	}
 }
