@@ -8,16 +8,25 @@ package reCaChe
 
 import (
 	"fmt"
+	"github.com/golang/protobuf/proto"
 	"log"
 	"net/http"
+	pb "reCaChe/cachepb"
+	"reCaChe/consistent"
 	"strings"
+	"sync"
 )
 
 const defaultBasePath = "/_reCache/"
+const defaultReplicas = 50
+
 
 type HTTPPool struct {
 	self      string//记录自己的地址，IP和端口
 	basePath  string//节点间通讯地址的前缀，默认是...
+	mu          sync.Mutex
+	peers       *consistent.Map//根据具体的key选择节点
+	httpGetters map[string]*httpGet//映射远程节点httpGet
 }
 
 func NewHTTPPool(self string) *HTTPPool {
@@ -61,7 +70,39 @@ func (p *HTTPPool) ServeHTTP(w http.ResponseWriter,r *http.Request){
 		http.Error(w,"",http.StatusInternalServerError)
 	}
 
+	body, err := proto.Marshal(&pb.Response{Value: []byte(view.(string))})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	//使用 w.Write() 将缓存值作为 httpResponse 的 body 返回
-	w.Header().Set("Content-Type","application/octet-stream")
-	_, _ = w.Write([]byte(view.(string)))
+	w.Header().Set("Content-Type", "application/octet-stream")
+	_, _ = w.Write(body)
 }
+
+//Set() 方法实例化了一致性哈希算法，并且添加了传入的节点
+func (p *HTTPPool) Set(peers ...string) {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	p.peers = consistent.New(defaultReplicas, nil)
+	p.peers.Add(peers...)
+	p.httpGetters = make(map[string]*httpGet, len(peers))
+	//并为每一个节点创建了一个 HTTP 客户端 httpGetter
+	for _, peer := range peers {
+		p.httpGetters[peer] = &httpGet{baseURL: peer + p.basePath}
+	}
+}
+
+//根据具体的 key，选择节点，返回节点对应的 HTTP 客户端
+func (p *HTTPPool) PickPeer(key string) (*httpGet, bool){
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	if peer := p.peers.Get(key); peer != "" && peer != p.self {
+		p.Log("Pick peer %s",peer)
+		return p.httpGetters[peer], true
+	}
+	return nil, false
+}
+
+var _PeerPicker = (*HTTPPool)(nil)

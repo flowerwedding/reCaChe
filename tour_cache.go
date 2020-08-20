@@ -6,7 +6,12 @@
  **/
 package reCaChe
 
-import "sync"
+import (
+	"log"
+	"reCaChe/cachepb"
+	"reCaChe/singleflight"
+	"sync"
+)
 
 type Getter interface{
 	Get(key string) interface{}
@@ -29,6 +34,8 @@ type TourCache struct{
 	name        string
 	mainCache   *safeCaChe//并发安全的缓存实现
 	getter      Getter//回调，用于缓存未命中时从数据源获取的数据
+	peers       PeerPicker
+	loader      *singleflight.Group
 }
 
 //如果放在第一次set里面判断nil，可以延迟初始化，建设内存
@@ -39,6 +46,7 @@ func NewTourCache(name string,getter Getter,cache CaChe) *TourCache {
 		name:      name,
 		mainCache: newSafeCaChe(cache),
 		getter:    getter,
+		loader:    &singleflight.Group{},
 	}
 	tours[name] = tour
 	return tour
@@ -79,4 +87,57 @@ func (t *TourCache) Set(key string, val interface{}) {
 
 func (t *TourCache) Stat() *Stat {
 	return t.mainCache.stat()
+}
+
+func (t *TourCache) RegisterPeers(peers PeerPicker) {
+	if t.peers != nil {
+		panic("RegisterPeerPicker called more than once")
+	}
+	t.peers = peers
+}
+
+func (t *TourCache) load(key string) (value interface{}, err error){
+	viewi, err := t.loader.Do(key, func() (interface{}, error) {
+		if t.peers != nil {
+			if peer, ok := t.peers.PickPeer(key); ok {
+				if value, err  = t.getFromPeer(peer, key); err == nil {
+					return value, nil
+				}
+				log.Println("[cache] Failed to get from peer", err)
+			}
+		}
+
+		return t.getLocally(key)
+	})
+
+	if err == nil {
+		return viewi, nil
+	}
+	return
+}
+
+func (t *TourCache) getFromPeer(peer PeerGet, key string) (interface{}, error) {
+	req := &cachepb.Request{
+		Group: t.name,
+		Key:   key,
+	}
+	res := &cachepb.Response{}
+	err := peer.Get(req, res)
+	if err != nil {
+		return "", err
+	}
+	return res.Value, nil
+}
+
+func (t *TourCache) getLocally(key string) (interface{}, error) {
+	bytes := t.getter.Get(key)
+	if bytes == nil {
+		return nil, nil
+	}
+	t.populateCache(key, bytes)
+	return bytes, nil
+}
+
+func (t *TourCache) populateCache(key string, value interface{}) {
+	t.mainCache.set(key, value)
 }
